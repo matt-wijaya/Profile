@@ -1,0 +1,9 @@
+node_modules
+.next
+dev.log
+dev.err
+tsconfig.tsbuildinfo
+.vercel
+.env*.local
+AGENTS.md
+CLAUDE.md

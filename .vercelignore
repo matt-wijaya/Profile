@@ -1,0 +1,8 @@
+.next
+node_modules
+dev.log
+dev.err
+tsconfig.tsbuildinfo
+reference
+AGENT.md
+.env*.local
