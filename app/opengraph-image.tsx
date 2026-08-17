@@ -6,6 +6,7 @@ export const size = {
 };
 
 export const contentType = "image/png";
+export const alt = "Matthew Wijaya portfolio preview";
 
 export default function OpenGraphImage() {
   return new ImageResponse(

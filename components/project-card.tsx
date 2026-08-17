@@ -10,14 +10,16 @@ import { ScanOverlay, useTemporal } from "./temporal-archive";
 type ProjectCardProps = {
   project: Project;
   index: number;
+  headingLevel?: "h2" | "h3";
 };
 
-export function ProjectCard({ project, index }: ProjectCardProps) {
+export function ProjectCard({ project, index, headingLevel = "h3" }: ProjectCardProps) {
   const { recoverFragment } = useTemporal();
   const topLink = project.links[0];
   const secondLink = project.links[1];
   const caseNumber = (index + 1).toString().padStart(2, "0");
   const openProject = () => recoverFragment(2);
+  const Heading = headingLevel;
 
   return (
     <article
@@ -41,17 +43,17 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 {formatStatus(project.status)}
               </span>
               {project.award ? <span className="border border-[rgba(224,120,45,0.18)] px-3 py-1 text-xs">{project.award}</span> : null}
-              {project.builtByMatthew === false ? (
+              {project.role || project.builtByMatthew === false ? (
                 <span className="border border-[rgba(224,120,45,0.18)] px-3 py-1 text-xs text-[var(--muted)] uppercase tracking-[0.16em]">
-                  role / design
+                  role / {project.role ?? "design"}
                 </span>
               ) : null}
             </div>
             <div>
               <p className="meta-label text-[10px] text-[var(--accent)]">{project.categories.join(" / ")}</p>
-              <h3 className="display-font mt-3 text-[clamp(2rem,4vw,3.2rem)] leading-[0.95] tracking-[-0.05em]">
+              <Heading className="display-font mt-3 text-[clamp(2rem,4vw,3.2rem)] leading-[0.95] tracking-[-0.05em]">
                 {project.title}
-              </h3>
+              </Heading>
               {project.subtitle ? <p className="mt-3 max-w-lg text-base leading-7 text-[var(--muted)]">{project.subtitle}</p> : null}
             </div>
             <p className="max-w-xl text-sm leading-7 text-[var(--muted)] sm:text-base">{project.description}</p>

@@ -159,13 +159,13 @@ export function useTemporal() {
   return context;
 }
 
-export function TemporalStatus() {
+export function TemporalStatus({ routeLabel }: { routeLabel?: string }) {
   const { message, sectorLabel } = useTemporal();
 
   return (
     <span className="temporal-status" aria-live="polite" aria-atomic="true">
       <span className="temporal-status-lamp" aria-hidden="true" />
-      {message ?? `${sectorLabel}`}
+      {message ?? routeLabel ?? sectorLabel}
     </span>
   );
 }

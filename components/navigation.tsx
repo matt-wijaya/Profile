@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BriefcaseBusiness, FolderGit2, Menu, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
@@ -18,6 +19,8 @@ const navItems = [
 ];
 
 export function Navigation() {
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { activeSector } = useTemporal();
@@ -49,18 +52,18 @@ export function Navigation() {
         <div className={`mb-2 hidden items-center justify-between gap-4 text-[10px] uppercase tracking-[0.18em] text-[var(--muted)] lg:flex ${scrolled ? "opacity-100" : "opacity-80"}`}>
           <span className="mono-font shrink-0">Temporal Archive</span>
           <div className="flex min-w-0 items-center gap-4">
-            <TemporalStatus />
+            <TemporalStatus routeLabel={isHomepage ? undefined : "PROJECT ARCHIVE"} />
             <FragmentIndicator />
           </div>
         </div>
         <div className="flex items-center justify-between gap-4">
-          <Link href="#about" className="group min-h-11 px-3 py-2">
+          <Link href={isHomepage ? "#about" : "/"} className="group min-h-11 px-3 py-2">
             <span className="block text-sm font-semibold tracking-[0.02em] text-[#f0e3ca]">Matthew Wijaya</span>
           </Link>
           <nav className="hidden items-center gap-3 lg:flex" aria-label="Primary">
             {navItems.map((item) => {
-              const isAnchor = item.href.startsWith("#");
-              const isActive = isAnchor && activeSector === item.href.slice(1);
+              const isActive = isHomepage && activeSector === item.href.slice(1);
+              const href = isHomepage ? item.href : `/${item.href}`;
               const className = `relative inline-flex min-h-11 items-center px-0 text-sm uppercase tracking-[0.18em] transition ${
                 isActive
                   ? "text-[var(--text)]"
@@ -70,9 +73,7 @@ export function Navigation() {
               return (
                 <Link
                   key={item.label}
-                  href={item.href}
-                  target={isAnchor ? undefined : "_blank"}
-                  rel={isAnchor ? undefined : "noreferrer"}
+                  href={href}
                   className={className}
                   aria-current={isActive ? "location" : undefined}
                 >
@@ -118,7 +119,7 @@ export function Navigation() {
           </button>
         </div>
         <div className="mt-2 flex items-center justify-between gap-3 border-t border-[rgba(224,120,45,0.12)] pt-2 text-[9px] uppercase tracking-[0.12em] text-[var(--muted)] lg:hidden">
-          <TemporalStatus />
+          <TemporalStatus routeLabel={isHomepage ? undefined : "PROJECT ARCHIVE"} />
           <FragmentIndicator />
         </div>
         {open ? (
@@ -128,15 +129,13 @@ export function Navigation() {
             </div>
             <nav className="grid gap-1" aria-label="Mobile">
               {navItems.map((item) => {
-                const isAnchor = item.href.startsWith("#");
-                const isActive = isAnchor && activeSector === item.href.slice(1);
+                const isActive = isHomepage && activeSector === item.href.slice(1);
+                const href = isHomepage ? item.href : `/${item.href}`;
 
                 return (
                   <Link
                     key={item.label}
-                    href={item.href}
-                    target={item.href.startsWith("#") ? undefined : "_blank"}
-                    rel={item.href.startsWith("#") ? undefined : "noreferrer"}
+                    href={href}
                     className={`relative border border-[rgba(128,101,74,0.26)] px-4 py-3 transition hover:border-[rgba(224,120,45,0.36)] hover:text-[var(--text)] ${
                       isActive ? "text-[var(--text)]" : "text-[var(--muted)]"
                     }`}

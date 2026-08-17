@@ -42,24 +42,38 @@ const plusJakartaSans = localFont({
 });
 
 const siteUrl = getSiteUrl();
+const homeUrl = `${siteUrl}/`;
+const title = "Matthew Wijaya \u2014 Computer Science, Design & Software";
+const description =
+  "Matthew Wijaya is a Computer Science student at Universitas Indonesia working across software engineering, product design, interaction design, and web development.";
+const ogImageUrl = `${siteUrl}/opengraph-image`;
 
 export const metadata: Metadata = {
-  title: "Matthew Wijaya - Design & Software",
-  description:
-    "Portfolio of Matthew Wijaya, a Computer Science student at Universitas Indonesia working across UI/UX design, web experiences, and software development.",
+  title,
+  description,
   metadataBase: new URL(siteUrl),
   alternates: {
-    canonical: "/",
+    canonical: homeUrl,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
-    title: "Matthew Wijaya - Design & Software",
-    description:
-      "Portfolio of Matthew Wijaya, a Computer Science student at Universitas Indonesia working across UI/UX design, web experiences, and software development.",
-    url: siteUrl,
+    title,
+    description,
+    url: homeUrl,
     siteName: "Matthew Wijaya Portfolio",
     images: [
       {
-        url: "/opengraph-image",
+        url: ogImageUrl,
         width: 1200,
         height: 630,
         alt: "Matthew Wijaya portfolio preview",
@@ -70,10 +84,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Matthew Wijaya - Design & Software",
-    description:
-      "Portfolio of Matthew Wijaya, a Computer Science student at Universitas Indonesia working across UI/UX design, web experiences, and software development.",
-    images: ["/opengraph-image"],
+    title,
+    description,
+    images: [{ url: ogImageUrl, alt: "Matthew Wijaya portfolio preview" }],
   },
 };
 

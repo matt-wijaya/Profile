@@ -1,5 +1,6 @@
 import type { Project } from "@/data/projects";
 
+import { CtaLink } from "./cta-link";
 import { ProjectCard } from "./project-card";
 import { SectionLabel } from "./section-label";
 import { TemporalSection } from "./temporal-archive";
@@ -21,6 +22,14 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
           {projects.map((project, index) => (
             <ProjectCard key={project.slug} project={project} index={index} />
           ))}
+        </div>
+        <div className="mt-8 flex justify-end">
+          <CtaLink
+            href="/projects"
+            label="ACCESS FULL ARCHIVE"
+            cursorLabel="ACCESS"
+            openInNewTab={false}
+          />
         </div>
       </div>
     </TemporalSection>

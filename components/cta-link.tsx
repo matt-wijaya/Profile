@@ -12,6 +12,7 @@ type CtaLinkProps = {
   className?: string;
   cursorLabel?: string;
   onActivate?: () => void;
+  openInNewTab?: boolean;
 };
 
 function normalizeHref(href: string) {
@@ -29,10 +30,11 @@ export function CtaLink({
   className = "",
   cursorLabel = "EXIT ARCHIVE ↗",
   onActivate,
+  openInNewTab,
 }: CtaLinkProps) {
   const placeholder = isPlaceholderLink(href);
   const normalizedHref = normalizeHref(href);
-  const opensNewTab = normalizedHref.startsWith("http") || normalizedHref.startsWith("/");
+  const opensNewTab = openInNewTab ?? (normalizedHref.startsWith("http") || normalizedHref.startsWith("/"));
   const baseClass =
     emphasis === "primary"
       ? "console-button bg-[linear-gradient(180deg,#f09a46,#c95f23)] text-[#1d130d] hover:brightness-105"

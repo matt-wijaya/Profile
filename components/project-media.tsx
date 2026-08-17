@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 import type { Project } from "@/data/projects";
 
@@ -20,6 +23,26 @@ function ScreenFooter({ path }: { path: string }) {
     <div className="mt-4 flex items-center justify-between gap-4 text-[10px] text-[var(--muted)]">
       <span className="mono-font">replace with: {path.replace("/public/", "/")}</span>
       <span className="mono-font">asset pending</span>
+    </div>
+  );
+}
+
+function PendingArtifact({ project }: { project: Project }) {
+  const expectedPath = project.image || "cover asset not assigned";
+
+  return (
+    <div className="hardware-shell flex aspect-[16/9] min-h-52 flex-col justify-between p-4 sm:p-5">
+      <ShellLabel left="Media Record / Pending" right={project.year ?? "Un-dated"} />
+      <div className="grid flex-1 place-items-center border border-dashed border-[rgba(224,120,45,0.24)] bg-[rgba(12,9,7,0.42)] p-6 text-center">
+        <div>
+          <p className="mono-font text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Cover asset pending</p>
+          <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{project.title} preview has not been filed yet.</p>
+        </div>
+      </div>
+      <div className="mt-4 flex items-center justify-between gap-4 text-[10px] text-[var(--muted)]">
+        <span className="mono-font break-all">expected: {expectedPath}</span>
+        <span className="mono-font shrink-0">asset pending</span>
+      </div>
     </div>
   );
 }
@@ -229,6 +252,7 @@ function TunasArtifact({ project }: { project: Project }) {
 }
 
 export function ProjectMedia({ project }: ProjectMediaProps) {
+  const [assetFailed, setAssetFailed] = useState(false);
   const hasAsset = project.image.startsWith("/projects/");
 
   if (project.videoEmbedUrl) {
@@ -247,14 +271,17 @@ export function ProjectMedia({ project }: ProjectMediaProps) {
   }
 
   if (hasAsset) {
+    if (assetFailed) return <PendingArtifact project={project} />;
+
     return (
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-[rgba(12,9,7,0.72)]">
         <Image
           src={project.image}
-          alt={`${project.title} project preview`}
+          alt={`${project.title} project cover`}
           fill
           className="object-cover"
           sizes="(max-width: 1024px) 100vw, 50vw"
+          onError={() => setAssetFailed(true)}
         />
       </div>
     );
@@ -271,7 +298,10 @@ export function ProjectMedia({ project }: ProjectMediaProps) {
       return <LawArtifact project={project} />;
     case "tunas":
       return <TunasArtifact project={project} />;
+    case "kudos-kiddos":
+    case "design-portfolio":
+      return <PendingArtifact project={project} />;
     default:
-      return <PpmbArtifact project={project} />;
+      return <PendingArtifact project={project} />;
   }
 }

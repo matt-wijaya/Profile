@@ -19,13 +19,13 @@ export function Hero({ profile }: HeroProps) {
       <div className="container-grid grid min-h-[78vh] items-center gap-12 pb-16 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,31rem)] lg:pb-24">
         <div className="space-y-8">
           <div className="space-y-5">
-            <p className="hero-nameplate">{profile.name}</p>
+            <h1 className="hero-nameplate">{profile.name}</h1>
             <div className="flex items-center gap-3">
               <div className="archive-rule hidden h-px flex-1 md:block" />
             </div>
-            <h1 className="display-font text-balance max-w-[12ch] text-[clamp(3.35rem,8vw,6.9rem)] font-extrabold leading-[0.92] tracking-[-0.075em]">
+            <h2 className="display-font text-balance max-w-[12ch] text-[clamp(3.35rem,8vw,6.9rem)] font-extrabold leading-[0.92] tracking-[-0.075em]">
               {profile.headline}
-            </h1>
+            </h2>
             <p className="max-w-2xl text-balance text-lg leading-8 text-[var(--muted)] sm:text-xl">
               {profile.supportingCopy}
             </p>
