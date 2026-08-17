@@ -97,7 +97,7 @@ export const allProjects: Project[] = [
       "An educational mobile experience shaped from an open SDG-based brief, balancing children's learning and engagement with parental supervision and AI-assisted guidance.",
     image: "/projects/kudos-kiddos-cover.webp",
     status: "case-study",
-    selected: true,
+    selected: false,
     group: "work",
     role: "UI/UX Designer",
     builtByMatthew: false,
@@ -121,7 +121,7 @@ export const allProjects: Project[] = [
       "A live digital experience designed for PPMB KMBUI 2026, combining visual identity, information hierarchy, and responsive web execution.",
     image: "/projects/ppmb-cover.webp",
     status: "live",
-    selected: false,
+    selected: true,
     group: "work",
     layout: "split",
     builtByMatthew: false,
@@ -177,25 +177,6 @@ export const allProjects: Project[] = [
     layout: "editorial",
     stack: ["Web Design", "UI", "Client Work", "Responsive"],
     links: [
-    ],
-  },
-  {
-    slug: "design-portfolio",
-    title: "Design Portfolio",
-    year: "2025",
-    categories: ["Visual Design", "Behance"],
-    description:
-      "A curated Behance shelf for selected visual design work.",
-    image: "",
-    status: "case-study",
-    selected: false,
-    group: "other",
-    links: [
-      {
-        label: "Open Behance Portfolio",
-        href: "https://www.behance.net/gallery/251890739/Design-Portfolio",
-        type: "behance",
-      },
     ],
   },
 ];
